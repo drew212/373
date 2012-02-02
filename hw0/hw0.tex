@@ -1,0 +1,77 @@
+\ifx\bookMode\undefined
+\documentclass[12pt]{article}
+\usepackage{373,graphicx}
+\fi
+
+\newcommand{\figurescale}{0.8}
+
+\BeginDocument
+
+\HWNum{CS373 - Spring 2012}{0}{Thursday Jan 26 at 2:00 PM in class (151 Everitt Lab)}
+\Title{Problem Set 0}
+\MakeTitleHW
+
+
+%\hline
+
+Please \underline{follow} the homework format guidelines posted on the class web
+page (or you \underline{will} lose points):
+
+\centerline{\url{\CourseWebpage}}
+%\hline
+\bigskip
+
+
+\begin{enumerate}
+    \item \ProblemTtl{True/false}{Notation}{10}
+
+    Answer each of the following with \textsf{true} or \textsf{false}.  Follow \underline{the notations in Sipser}. We use $\{\dots\}$ to represent
+    sets (not, for example, multisets). Let $\mathbb{N}=\{1,2,\ldots\}$ denote the set of natural numbers, $\mathbb{Z}=\{\ldots,-2,-1,0,1,2,\ldots\}$ -- the set of integers, $\mathbb{P}=\{2,3,5,\ldots\}$ -- the set of all prime numbers. The symbol $P(S)$ denotes the set of all subsets of $S$ (the power set of $S$). 
+    
+    \begin{enumerate}[(1)]
+            \item $\mathbb{P} \in P(\mathbb{N})$
+        \item $\mathbb{Z}\cup \mathbb{N} \subsetneq \mathbb{Z}$
+            \item $(\mathbb{Z} \setminus \mathbb{P}) \cup \mathbb{N} = (\mathbb{Z} \setminus \mathbb{N}) \cup \mathbb{P}$
+      \item $(\mathbb{N}\cap \{-1\}) \in \{\varnothing\}$
+            \item $\varnothing \in \{\{\varnothing\}, \mathbb{Z}\}$
+            \item $\varnothing \subseteq \{\{\varnothing\}, \mathbb{Z}\}$
+            \item $|P(P(\varnothing)) \setminus \{\varnothing\}|=1$
+        \item $\varnothing = \mathbb{N}^2 \setminus ((\mathbb{N} \cap \mathbb{Z} ) \times (\mathbb{N} \cup \mathbb{P}))$
+            \item $P(\mathbb{Z}) \times P(\mathbb{N}) \neq P(\mathbb{Z} \times \mathbb{N})$
+            \item $\{w\mid w=w_{0}w_{1}...w_{n},w_{i} \in \mathbb{Z}\}$ is a language.
+        
+    \end{enumerate}
+
+    \item 
+    \ProblemTtl{Bad induction}{Errors}{10}
+        
+    The following is a proof that all natural numbers are equal.
+    
+    Let $a,b\in\mathbb{N}$ and $k = \max(a,b)$. We will prove, using induction on $k$, that $a = b$.
+
+    Base case: $k = 1$.  In this case, since $a$ and $b$ are natural numbers and $a,b\le 1$, both of them are equal to 1.
+    
+    Inductive hypothesis:  If $a,b\in\mathbb{N}$ and $k = \max(a,b) \le n$, then $a = b$.
+
+    Inductive step: Let $k = n+1$. Then $\max(a-1,b-1) = \max(a,b)-1 = k-1 = n$. By the inductive hypothesis, $a-1 = b-1$; therefore $a = b$.
+    
+    Conclusion:  Since $a$ and $b$ were arbitrary, we have shown that any 2 natural numbers are equal.
+
+    Explain in detail why this proof is wrong.
+    
+    \item 
+    \ProblemTtl{Set theory}{Proof}{15}
+
+    Let $\mathbb{R}$ denote the set of real numbers. Prove that a set of disjoint open intervals of $\mathbb{R}$ is at most countably infinite. 
+    
+    In other words, let $X\subset P(\mathbb{R})$ be a set with elements of the form $$(a,b)=\{x\in\mathbb{R}\mid a<x<b\},\ \text{where }a,b\in\mathbb{R},\ a<b.$$ Assuming that no 2 elements of $X$ intersect, prove that $X$ is finite or countably infinite.
+
+    \item 
+    \ProblemTtl{Induction}{Proof}{15}
+        
+    In Graphland, there are $n$ cities and just two airlines (boringly named Alpha and Beta).  All pairs of cities are connected by direct flights in both directions, but all flights between any particular pair are exclusively operated by either Alpha or Beta.
+    
+    Prove, using induction, that one of the airlines can go out of business, and it would still be possible to get from any city to any other city (possibly with intermediate stops).
+   
+\end{enumerate}
+\EndDocument

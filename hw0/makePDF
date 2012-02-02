@@ -1,0 +1,6 @@
+cd figs
+fig2pdf *.fig --nogv --bbox=dvips
+cd ..
+pdflatex hw0
+pdflatex hw0
+

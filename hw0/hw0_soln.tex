@@ -1,0 +1,129 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{enumerate}
+
+
+\pagestyle{fancy}
+
+\lhead{CS 373 \\ Homework 0}
+\chead{}
+\rhead{Drew Cross (ddcross2)\\ \emph{Partners:} Sean Nicolay, Eric Parsons }
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+\begin{document}
+
+\section*{Homework 0}
+
+\subsection*{Problem 1}
+
+\begin{enumerate}[1)]
+
+            \item $\mathbb{P} \in P(\mathbb{N}) \rightarrow$ True
+        \item $\mathbb{Z}\cup \mathbb{N} \subsetneq \mathbb{Z} \rightarrow$ False
+            \item $(\mathbb{Z} \setminus \mathbb{P}) \cup \mathbb{N} = 
+                (\mathbb{Z} \setminus \mathbb{N}) \cup \mathbb{P}\rightarrow$ False
+
+      \item $(\mathbb{N}\cap \{-1\}) \in \{\varnothing\}\rightarrow$ True
+            \item $\varnothing \in \{\{\varnothing\}, \mathbb{Z}\}\rightarrow$ False
+            \item $\varnothing \subseteq \{\{\varnothing\}, \mathbb{Z}\}\rightarrow$ True
+            \item $|P(P(\varnothing)) \setminus \{\varnothing\}|=1\rightarrow$ True
+        \item $\varnothing = \mathbb{N}^2 \setminus ((\mathbb{N} \cap \mathbb{Z} )
+        \times (\mathbb{N} \cup \mathbb{P}))\rightarrow$ True
+
+            \item $P(\mathbb{Z}) \times P(\mathbb{N}) \neq P(\mathbb{Z} \times \mathbb{N})\rightarrow$ True
+            \item $\{w\mid w=w_{0}w_{1}...w_{n},w_{i} \in \mathbb{Z}\}$ is a language. $\rightarrow$ False
+\end{enumerate}
+
+\pagebreak
+\subsection*{Problem 2}
+
+    The following is a proof that all natural numbers are equal.
+
+    Let $a,b\in\mathbb{N}$ and $k = \max(a,b)$. We will prove, using induction on $k$, that $a = b$.
+
+    Base case: $k = 1$.  In this case, since $a$ and $b$ are natural numbers and $a,b\le 1$,
+
+    both of them are equal to 1
+
+    Inductive hypothesis:  If $a,b\in\mathbb{N}$ and $k = \max(a,b) \le n$, then $a = b$.
+
+    Inductive step: Let $k = n+1$. Then $\max(a-1,b-1) = \max(a,b)-1 = k-1 = n$.
+
+    By the inductive hypothesis, $a-1 = b-1$; therefore $a = b$.
+
+    Conclusion:  Since $a$ and $b$ were arbitrary, we have shown that any 2 natural numbers are equal.
+
+    Explain in detail why this proof is wrong.\\[5pt]
+
+    The main issue with this proof is the inductive step. In the inductive step, when $k=n+1$ there are three
+    posibilities for what can happen to max(a,b):
+    \begin{enumerate}[1)]
+    \item a, b both increase $\rightarrow \max(a-1,b-1) = k-1 = n$ - The case considered in this proof
+    \item a only increases $\rightarrow \max(a-1,b) = k-1 = n$
+    \item b only increases $\rightarrow \max(a, b-1) = k-1 =n$
+    \end{enumerate}
+
+    Since this proof doesn't consider all 3 cases, it is invalid.
+
+\pagebreak
+\subsection*{Problem 3}
+
+Let $\mathbb{R}$ denote the set of real numbers. Prove that a set of disjoint open intervals of $\mathbb{R}$
+is at most countably infinite.\\
+
+In other words, let $X \subset P(\mathbb{R})$ with elements of the form:
+\[ (a,b)=\{ x\in\mathbb{R} \mid a<x<b \} \text{ where } a,b \in \mathbb{R}, a<b.\]
+
+Let $\mathbb{Q}$ denote the rational numbers. Because the real numbers lie on an interval between $a$ and $b$, it is
+possible to pick a number $q\in\mathbb{Q}$ such that $q > a$ and $q < b$. To show this is possible we can find a decimal
+location where the two real numbers differ, call it $n$. We can then truncate the real $b$ at $n+1$.
+Now we have a number with a finite number of decimal places, so we have found a $q_{1} \in \mathbb{Q}$.
+Now let $q = q_{1}$. Since we have decided to select a decimal location
+we know that $a > q_{1} \leq b$. (The fact that $q_{1}$ can possibly be equal to $b$
+and does not lie on the interval is irrelevant because it still uniquely defines the interval.
+In other words, no two intervals can share the same b, because they are disjoint.) Because we have selected $q = q_{1}$
+we know that $q$
+lies on the interval $(a, b]$, therefore we have a one-to-one mapping from $\mathbb{Q}$ to $X$.\\
+
+
+We proved in class that $\mathbb{Q}$ is countable, and since we have found a mapping from $\mathbb{Q}$ to $X$
+we have proved that $X$ is at most countably infinite.
+\[\square\]
+
+\pagebreak
+\subsection*{Problem 4}
+We have a completely connected graph with edges labled either $\alpha$ or $\beta$. Using induction we can prove that
+we can remove one type of edge, either $\alpha$ or $\beta$. And still have a connected graph.\\
+
+Base Case:\\
+A graph containing a single node:\\
+This case is trivial because we can remove either edge type $\alpha$ or $\beta$.\\
+
+Inductive Hypothesis:\\
+Given a graph of $n$ nodes, assume we can pick an edge type, either $\alpha$ or $\beta$ to remove, and still have a
+connected graph.\\
+
+Inductive Step:\\
+If we add an addional node: node $n+1$, we need to prove we can still pick one edge type to remove and still have a
+connected graph. We now have two cases:\\
+
+Case 1:\\
+All paths from the node $n+1$ are of one type, either $\alpha$ or $\beta$. In this case, we can remove the opposite
+edge type. Now, since all other nodes are connected to node $n+1$, the graph is still connected.\\
+
+Case 2:\\
+The paths from node $n+1$ contain at least one of each $\alpha$ and $\beta$. By our inductive hypothesis we know that
+we're able to remove at least one edge type from the graph. Without the loss of generality we can assume this type is
+$\alpha$. In this case, we know that the node $n+1$ is connected by at least 1 $\beta$ edge, so we can remove the
+$\alpha$ edge type and still have a connected graph.
+\[\square\]
+
+\end{document}
