@@ -1,0 +1,111 @@
+\ifx\bookMode\undefined
+\documentclass[12pt]{article}
+\usepackage{373,graphicx}
+\fi
+
+\newcommand{\figurescale}{0.8}
+
+\BeginDocument
+
+\HWNum{CS373 - Spring 2012}{0}{Thursday Feb 23 at 2:00 PM in class (151 Everitt Lab)}
+\Title{Problem Set 2}
+\MakeTitleHW
+
+%\hline
+
+Please \underline{follow} the homework format guidelines posted on the class web
+page:
+
+\centerline{\url{\CourseWebpage}}
+%\hline
+\bigskip
+
+\begin{enumerate}
+
+%~~~~~~~~~~~~~~~~~
+    \item \ProblemTtl{DFA to Regex Conversion}{Comprehension}{5}
+    
+    Convert the following DFA to a regular expression using the GNFA technique from lecture. You do not need to include edges that are labeled with only the empty set. Show intermediate steps.
+   
+    \begin{center}
+    \includegraphics[scale=.5]{1.pdf}
+    \end{center}
+    
+%~~~~~~~~~~~~~~~~~
+    \item \ProblemTtl{DFA Minimization}{Comprehension}{5}
+    
+    Minimize the following DFA using the algorithm from lecture. Show your work.
+    
+    \begin{center}
+    \includegraphics[scale=.5]{2.pdf}
+    \end{center}
+    
+%~~~~~~~~~~~~~~~~~
+    \item \ProblemTtl{Equal Dollars}{Proof}{16}
+    
+    Let $\Sigma = \{1,2,\$\}$ and $\#\$(w)$, $\#1(w)$, and $\#2(w)$ be the number of $\$$, $1$ and $2$ symbols in a string $w$, respectively. Define the language $E$ over $\Sigma$ as the set of strings wherein $\$$ does not appear three times consecutively and the sum of all nondollar digits is equal to the number of $\$ $s. Formally,
+    \[ E = \{ w \in \Sigma^* ~|~ \text{$w$ does not contain substring $\$\$\$ $ and } \#\$(w) = \#1(w) + \#2(w) + \#2(w) \} \]
+    For example, $w_1 = \$1\$\$21\$ $ is in $E$ since $\#\$(w_1) = 4 = 1+2+1$, while $w_2 = 1\$\$11\$\$ $ and $w_3 = 1\$\$\$2$ are not in $E$.
+    \begin{enumerate}
+        \item Prove that $E$ is nonregular using the pumping lemma. (8 Points)
+        \item Prove that $E$ is nonregular using regular closure properties. You may assume that $\{0^{n} 1^{n} \in \{0,1\}^* ~|~ n \geq 0\}$ and $\{0^{2n} 1^{2n} \in \{0,1\}^* ~|~ n \geq 0\}$ are nonregular. (8 Points)
+    \end{enumerate}
+
+    
+%~~~~~~~~~~~~~~~~~
+    \item \ProblemTtl{Regular or Nonregular?}{Proof}{20}
+    
+    Determine whether the following languages over alphabet $\Sigma = \{0,1\}$ are regular or nonregular. If regular, provide a DFA, NFA, or regular expression for the language and explain it. If nonregular, prove this fact using the pumping lemma or closure properties.
+    \begin{enumerate}
+        \item $A = \{xyx^R ~|~ x \in \Sigma, y \in \Sigma^*\}$ (5 Points)
+        \item $B = \{xyx^R ~|~ x \in \Sigma^*, y \in \Sigma\}$ (5 Points)
+        \item $C = \{xyx^R ~|~ x \in \Sigma^*, y \in \Sigma^*\}$ (5 Points)
+        \item $D = \{xyy^Rx^R ~|~ x \in \Sigma^*, y \in \Sigma^*\} $ (5 Points)
+    \end{enumerate}
+ 
+ 
+%~~~~~~~~~~~~~~~~~
+    \item \ProblemTtl{Regex Properties}{Proof}{18}
+    
+    Prove or disprove the following claims about regular expressions.
+    \begin{enumerate}
+        \item For any regular expression $R$, if $L(R)$ is infinite, then $R$ contains a Kleene star. (5 Points)
+        \item For any regular expression $R$, if $R$ contains a Kleene star, then $L(R)$ is infinite. (5 Points)
+        \item The regular expression symbol $\varnothing$ is needed only to describe the regular language $\varnothing$. That is, for any regular expression $R$ containing a $\varnothing$, there is an alternate expression $R'$ with $L(R) = L(R')$ such that $R'$ does not contain a $\varnothing$ if and only if $L(R) \neq \varnothing$. (8 Points)
+    \end{enumerate}
+
+%~~~~~~~~~~~~~~~~~
+    \item \ProblemTtl{k-regular Languages}{Proof}{26} 
+    
+    A set of natural numbers is called \emph{$k$-regular} if a language of their base $k$ representations is regular. That is, for a natural number $n$, let $\langle n \rangle_k \in [0,k-1]^*$ be the string representation of $n$ in base $k$ with no leading zeroes over alphabet $[0,k-1] = \{0,1,2,...,k-1\}$. $S \subseteq \mathbb{N}$ is $k$-regular when $\{\langle n \rangle_k ~|~ n \in S\}$ is regular.
+    
+    For example, $\langle 13 \rangle_2$ is the string $1101$, and the set of all naturals $\mathbb{N}$ is $2$-regular since the language of all binary numbers $\{\langle n \rangle_2 ~|~ n \in \mathbb{N} \}$ is exactly $L(1(0 \cup 1)^*)$.
+    \begin{enumerate}
+        \item Prove that the set of all multiples of a fixed natural $m$ is $k$-regular for all $m,k \in \mathbb{N}$. (8 Points)
+        \item Give an example of a $3$-regular set that is not $2$-regular, and prove it. (8 Points)
+        \item Prove that the set of all primes is not $k$-regular for any $k \in \mathbb{N}$. (Hint: You may use the fact that for any integer $x$ and prime $p$, $x^p - x$ is divisible by $p$.) (10 Points)
+    \end{enumerate}
+
+
+%~~~~~~~~~~~~~~~~~
+    \item \ProblemTtl{Bad Proof}{Analysis}{10} 
+
+    The following pumping lemma proof contains an error. Explain where the logic fails \textbf{and} provide a correct proof.
+
+    \begin{center}
+        \fbox{
+            \parbox{0.8\linewidth}{
+            \textbf{Claim}: Let $\#0(w)$ and $\#1(w)$ be the number of $0$s and $1s$ in $w$, respectively. Then
+            \[ A = \{uv \in \{0,1\}^* ~:~ |u| = |v|, \#0(u) = \#1(v), \text{ and } \#0(v) = \#1(u) \}\] 
+            is not a regular language. \\
+            \\
+            \textbf{Proof}: Say there is some pumping length $p$. \\ 
+            Choose $w = 0^k 1^k 0^k  1^k \in A$ where $k = \lfloor \frac{p}{2} \rfloor$. \\
+            Consider the division $w = xyz$ where $x = \varepsilon$, $y = 0^j$ for $0 < j \leq k$, and $z = 0^{k-j}1^k0^k1^k$. This is consistent with the pumping criteria since $y \neq \varepsilon$ and $|xy| \leq p$. Then the string $xy^0z = 0^{k-j}1^k0^k1^k$ is not in $A$. Note that $j$ must be even, since $xy^0z$ would have odd length otherwise, so $xy^0z$ can be written as $uv$ with $|u| = |v|$. Then $u = 0^{k-j}1^k0^{\frac{j}{2}}$ and $v = 0^{k-\frac{j}{2}} 1^k$, but $\#1(u) \neq \#0(v)$ since $k \neq k - \frac{j}{2}$. Because $w$ cannot be pumped, $A$ is not regular by the pumping lemma.
+            }
+        }
+    \end{center}
+
+%~~~~~~~~~~~~~~~~~
+\end{enumerate}
+\EndDocument
