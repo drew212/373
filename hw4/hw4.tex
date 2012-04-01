@@ -1,0 +1,74 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+
+
+\pagestyle{fancy}
+
+\lhead{CS 373 \\ Homework 4}
+\chead{}
+\rhead{Drew Cross (ddcross2) \\
+       \emph{Partners:} Eric Parsons}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+\begin{document}
+
+\subsection*{Problem 1}
+CFG Parsing
+
+RNA molecules are crucial to all life on Earth.  In fact, they're so important, some researchers
+theorize these molecules may have been the start of all life on Earth. For our purposes, RNAs are
+represented as strings on the alphabet $\Sigma=\{a,u,c,g\}$.  The following grammar comes from an
+actual research paper\footnote{http://www.biomedcentral.com/1471-2105/5/71} about computational
+analysis of RNA: \\
+
+    $S \rightarrow LS \;|\; L$
+
+    $L \rightarrow aFu \;|\; uFa \;|\; cFg \;|\; gFc \;|\; a \;|\; u \;|\; c \;|\; g$
+
+    $F \rightarrow aFu \;|\; uFa \;|\; cFg \;|\; gFc \;|\; LS$
+
+\begin{enumerate}[(a)]
+\item Put this grammar in CNF. (3 Points)
+%TODO
+\item Provite the CYK table for these strings:
+    \begin{itemize}
+        \item $w_1=gaccuc$ (4 points)
+        %TODO
+        \item $w_2=uggu$ (3 points)
+        %TODO
+    \end{itemize}
+
+\item Prove that the language accepted by this grammar is actually regular. (3 Points)
+
+This language is regular because it is essentaily $\Sigma^*$.
+%TODO
+
+\end{enumerate}
+
+\newpage
+\subsection*{Problem 2}
+
+\newpage
+\subsection*{Problem 3}
+
+\newpage
+\subsection*{Problem 4}
+
+\newpage
+\subsection*{Problem 5}
+
+\newpage
+\subsection*{Problem 6}
+
+\end{document}
