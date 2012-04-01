@@ -181,7 +181,7 @@ $C \rightarrow 1C2\ | D $ \\
 $D \rightarrow 1D2\ |\ \varepsilon$
 
 Here we need to build strings from the outside in, and we can move in one side at a time
-(such as going from S to B, or both at a time (such as going from S to C: \\
+(such as going from S to B), or both at a time (such as going from S to C): \\
 S is building the 0's and 3's in pairs. \\
 B builds up 0's and 2's together. \\
 C builds up 1's and 3's together. \\
@@ -226,6 +226,14 @@ not converted from CFGs using the equivalence theorem.
     \path[->] (5) edge node {$\varepsilon, \$ \rightarrow \varepsilon$} (6);
 
     \end{tikzpicture}
+    
+    We start off by pushing 2 zeros on the stack for every single 0 we read. Then when we hit
+    our first one, we can start counting the middle of the string. Now we pop off a zero for
+    every one we reach. When we're at the bottom of the stack we will be able to transition
+    accross $\varepsilon, \$ \rightarrow \$$. Now if we read ones by the loop  we are ok, which
+    on node 4 if we read a single one we can take the
+    $\varepsilon, 1\$ \rightarrow \varepsilon$ transition, or if we read more than one, we
+    transition over to 5 and need to read off the correct number of ones.
 
 \item $B = \{ w \in \{0,1\}^* | \#0(w) > \#1(w)$ and $(\#0(w) - \#1(w))$ is even $\}$. (5 Points)
 
@@ -254,6 +262,13 @@ not converted from CFGs using the equivalence theorem.
 
 
     \end{tikzpicture}
+
+    State 4 is for when we have more 1's than 0's, and we push on and pop off until we reach the
+    bottom of the stack. states 3 and 4 are basically odd/even for when we have more 0's than
+    1's.
+
+
+\newpage
 
 \item The compliment of $C = \{ww | w\in \Sigma^*\}$ over the alphabet $\Sigma = \{0,1\}$. (10 Points)
 
@@ -298,6 +313,29 @@ not converted from CFGs using the equivalence theorem.
     \path[->] (8) edge[loop below] node {$0/1, a \rightarrow \varepsilon$} (8);
 
     \end{tikzpicture}
+
+    In order to make this PDA work, we have to heavily exploit the nondeterminism of a PDA.
+    First, states 10 and 11 allow us to check if the string is odd or even. If the string is
+    odd we want to accept because $ww$ will always be even length.
+
+    The top part of the DFA can be explained by the fact that the compliment of
+    $\{ww|w\in\Sigma^*\}$ can be explained by $\Sigma^n1\Sigma^{n+m}0\Sigma^m$ or
+    $\Sigma^n0\Sigma^{n+m}1\Sigma^m$, that is, we want at least two symbols in each part of the
+    string to be different, while being separated from each other in the middle by the total
+    number of symobls that are on their outside. For example: $101111$ here $n=m=1$
+    So we first count the n number of symbols in state 2. Then we read either a zero and go
+    to state 3, or we read a 1, and go to state 6. From here we count our first $n$ letters
+    of the middle portion. Then when we reach the bottom of the stack we go to states 4 or 7,
+    depending on whether you read a 1 or a 0 as the middle symbol. Now we count the $m$ number
+    of symbols until we reach the opposite symbol we were looking for. And we move on to states
+    5 or 8. Now we pop off the $m$ number of symbols, if we reach the bottom of the stack, and
+    we're finished with the string, we end up in state 9, accepting.
+
+    The fact that we can do this without knowing where the oppsing 1 and 0 is because after
+    reading each symbol we can branch off and stay at current node counting for n or m, or we
+    can continue on to the next node(unless we're at the transtions where we need to be at the
+    bottom of the stack).
+
 
 \end{enumerate}
 
@@ -410,10 +448,10 @@ strings that are of odd length separated. To produce the grammar further we look
 to the left and right in each string recursivly. We have 4 cases:\\
 (Let X in the following be A or B for each respective string.)
 \begin{enumerate}[1.]
-\item If the outer string is 0X0
-\item If the outer string is 1X0
-\item If the outer string is 0X1
-\item If the outer string is 1X1
+\item The outer string can be 0X0
+\item The outer string can be 1X0
+\item The outer string can be 0X1
+\item The outer string can be 1X1
 \end{enumerate}
 
 For each of these cases we have rules in for each variable in the grammer.\\
