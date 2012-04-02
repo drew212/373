@@ -26,11 +26,11 @@
 \subsection*{Problem 1}
 CFG Parsing
 
-RNA molecules are crucial to all life on Earth.  In fact, they're so important, some researchers
-theorize these molecules may have been the start of all life on Earth. For our purposes, RNAs are
-represented as strings on the alphabet $\Sigma=\{a,u,c,g\}$.  The following grammar comes from an
-actual research paper\footnote{http://www.biomedcentral.com/1471-2105/5/71} about computational
-analysis of RNA: \\
+RNA molecules are crucial to all life on Earth.  In fact, they're so important, some
+researchers theorize these molecules may have been the start of all life on Earth. For our
+purposes, RNAs are represented as strings on the alphabet $\Sigma=\{a,u,c,g\}$.  The following 
+grammar comes from an actual research pape
+\footnote{http://www.biomedcentral.com/1471-2105/5/71} about computational analysis of RNA: \\
 
     $S \rightarrow LS \;|\; L$
 
@@ -44,9 +44,42 @@ analysis of RNA: \\
 \item Provite the CYK table for these strings:
     \begin{itemize}
         \item $w_1=gaccuc$ (4 points)
+
         %TODO
+        \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        & & & & & \\
+        \hline
+        & & & & & \\
+        \hline
+        & & & & & \\
+        \hline
+        & & & & & \\
+        \hline
+        & & & & & \\
+        \hline
+        & & & & & \\
+        \hline
+        g&a&c&c&u&c\\
+        \hline
+        \end{tabular}
         \item $w_2=uggu$ (3 points)
+
         %TODO
+        \begin{tabular}{|c|c|c|c|}
+        \hline
+        & & & \\
+        \hline
+        & & & \\
+        \hline
+        & & & \\
+        \hline
+        & & & \\
+        \hline
+        u&g&g&u\\
+        \hline
+        \end{tabular}
+
     \end{itemize}
 
 \item Prove that the language accepted by this grammar is actually regular. (3 Points)
@@ -54,21 +87,79 @@ analysis of RNA: \\
 This language is regular because it is essentaily $\Sigma^*$.
 %TODO
 
+\item Can you explain why these researchers are interested in parsing a regular language with
+a CFG? (2 points)
+%TODO
 \end{enumerate}
 
 \newpage
 \subsection*{Problem 2}
+Provide two proofs that the following languages are not context-free. First, provide a proof
+using the the pumping lemma for CFLs. Second, provide a proof using closure properties of
+CFLs. You may assume that the languages Sipser used when demonstrating the pumping lemma
+(see Sipser Examples 2.36, 2.37, and 2.38 pp. 126) are known to be non-context-free.
+
+\begin{enumerate}[(a)]
+    \item $\{ 0^n 1^{2m} 0^{m+k} \;|\; 0 \le n \le m, k \ge 0 \}$
+    \item $\{w\in \{a,b,c\}^* \;|\; \#a(w)=\#b(w)=\#c(w)\}$
+\end{enumerate}
 
 \newpage
 \subsection*{Problem 3}
-
+In class, we’ve covered several classes in the Chomsky Hierarchy: regular, context-free, and
+context-sensitive languages. Based on what you’ve learned, it should be possible to assign
+languages from these classes to their most exclusive (or least general) class in the Chomsky
+Hierarchy. For example, we know the language L = f0 n 1n 0g is context-free, but not regular.
+We used the pumping lemma for regular languages to prove that it is not regular (see Sipser,
+Example 1.73, pp. 80) and wrote a CFG to prove that it is context-free (see Sipser, Section
+2.1, pp. 100). Using all your knowledge of formal languages, place these languages into the
+most exclusive class in the hierarchy you know. State the class, and provide a proof that it is
+a member of that class. Also provide a proof that it is not a member of a more exclusive
+class. None of these languages belong exclusively to classes we haven’t yet covered, and all
+of the languages are on the alphabet $\Sigma = \{0,1\}$.
+\begin{enumerate}[(a)]
+    \item $\{w \;|\; \#0(w)=\#1(w)\}$ (5 points)
+    \item $\{w \;|\; w=w^r, \#0(w)=\#1(w)\}$ (5 points)
+    \item $\{w=xy \;|\; x,y\in\Sigma^* \text{ and } \#0(x)+\#1(x)=\#0(y)+\#1(y)\}$ (5 points)
+\end{enumerate}
 \newpage
 \subsection*{Problem 4}
+As on the midterm, the shuffle operation combines two strings $x$ and $y$ in all possible
+ways that preserve the original order of symbols from $x$ and $y$.  For example, if
+$x=x_1x_2x_3$ and $y=y_1y_2y_3y_4$, some valid shufflings are $y_1x_1y_2x_2x_3y_3y_4$ and
+$x_1x_2y_1y_2y_3x_3y_4$.  We define the shuffle of two languages $shuffle(A,B)$ to be the
+shuffling of all the words in $A$ with all the words in $B$.  More explicitly,
+    \[shuffle(A,B)=\bigcup\limits_{x \in A}\bigcup\limits_{y \in B} shuffle(x,y)\]
+    \begin{enumerate}[(a)]
+    \item Prove that, if $A$ is context-free and $B$ is regular, $shuffle(A,B)$ is
+    context-free. (8 points)
+    %TODO
+    \item Prove that, if $A$ and $B$ are context-free, $shuffle(A,B)$ is not necessarily
+    context-free. (8 points)
+    %TODO
+    \item For a binary language $L$ over $\Sigma=\{0,1\}$, we define the function $p$ (which
+    maps a single string to a set of strings) as follows:
+    \[p(w) = \{ x \in \{0,1\}^* \;|\; \#0(w) = \#0(x), \#1(w) = \#1(x) \}\]
+    %TODO
+    Using $p$, we define the operation $p$ on languages:
 
+    \[p(L) = \bigcup\limits_{w \in L} p(w)\]
+
+    Let $L$ be a regular language.  Show that $p(L)$ is context-free. (9 points)
+\end{enumerate}
 \newpage
 \subsection*{Problem 5}
 
+    Give a context sensitive grammar for the language:
+    \[A = \{0^k \;|\; k = 2^i+1,i\ge0\}\]
+
 \newpage
 \subsection*{Problem 6}
+Give a "higher level" (see "Examples of Turing machines", Sipser pp. 142) description of a
+Turing machine for the language:
+
+    \[A=\{a^ib^jc^k | i\%j=k \text{ and } i,j,k\ge1\}\]
+
+    Where $\%$ is the modulo operator.
 
 \end{document}
