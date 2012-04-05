@@ -296,7 +296,6 @@ the language of all palindromes that have the same number of 1's and 0's.
             \newpage
             \subsection*{Problem 4}
             As on the midterm, the shuffle operation combines two strings $x$ and $y$ in all possible
-            
             ways that preserve the original order of symbols from $x$ and $y$.  For example, if
             $x=x_1x_2x_3$ and $y=y_1y_2y_3y_4$, some valid shufflings are $y_1x_1y_2x_2x_3y_3y_4$ and
             $x_1x_2y_1y_2y_3x_3y_4$.  We define the shuffle of two languages $shuffle(A,B)$ to be the
@@ -304,11 +303,29 @@ the language of all palindromes that have the same number of 1's and 0's.
             \[shuffle(A,B)=\bigcup\limits_{x \in A}\bigcup\limits_{y \in B} shuffle(x,y)\]
             \begin{enumerate}[(a)]
     \item Prove that, if $A$ is context-free and $B$ is regular, $shuffle(A,B)$ is
-context-free. (8 points)
-    %TODO
+context-free. (8 points) Solution inspired from http://www.cs.toronto.edu/~rackoff/2405s12/a3.pdf.
+
+    For this proof we can get a PDA $M_1$ that will generate $A$ and a DFA, $M_2$ that will generate $B$
+    In order to construct a PDA that will recognize shuffle($A$, $B$) you can do as follows:
+
+    As the new machine $M$ reads input, it simpulates a copy of $M_1$ by using its stack, while at the same
+    time simulating $M_2$. This machine will remember to states nodeterministically, the states of $M_1$ and
+    $M_2$. $M$ uses nondeterminism to guess at each point in in the string which machine it is simulating. If
+    it reads an input symobl while simulating $M_1$, then that symbol is treated as $M_1$. The same goes for $M_2$.
+    If both simulations are accepting our newly constructed machine $M$ will accept.
+
     \item Prove that, if $A$ and $B$ are context-free, $shuffle(A,B)$ is not necessarily
-context-free. (8 points)
-    %TODO
+context-free. (8 points) Also inspired from link given above.
+
+    The general idea here is to design two context free languages, that when shuffled, end up with a non 
+    context free language.
+
+    Let $A = \{a^nb^n | n \geq 0\}$ and let $B = \{c^md^m | m \geq 0\}$. If shuffle were context free,
+    we could intersect it with a regular language, and still have a context free language.
+    So intersect Shuffle($A$, $B$) $\cap L(a^*(bc)^*d^*)$. We now have $L = \{a^n(bc)^nd^n\}$ Using a few
+    homomorphisms: $h(bc) = b$ and $h(d) = c$ We end up with the language $L = \{a^nb^nc^n\}$ which is not
+    context free.
+
     \item For a binary language $L$ over $\Sigma=\{0,1\}$, we define the function $p$ (which
             maps a single string to a set of strings) as follows:
     \[p(w) = \{ x \in \{0,1\}^* \;|\; \#0(w) = \#0(x), \#1(w) = \#1(x) \}\]
