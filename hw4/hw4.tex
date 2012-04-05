@@ -254,6 +254,36 @@ This only allows for the following cases:
 
 Since we cannot pump this string, we have a contradiction, so $L$ must not be
 context free.
+\[ \square \]
+
+Proof by construction:
+We know that the language that generates all even length palindromes is a CSL.
+
+$S \rightarrow 1A\# | 0A\$$
+
+$A \rightarrow 1A\# | 0A\$ | 0\$ | 1\#$
+
+$1\# \rightarrow 11$
+
+$1\$ \rightarrow 10$
+
+$0\# \rightarrow 01$
+
+$0\$ \rightarrow 00$
+
+We also know that the language that generates all strings with the same number
+of 1's and 0's is a CSL.
+
+$S \rightarrow 0A1A | 1A0A$
+
+$A \rightarrow 0A1A | 1A0A | 0C1C | 1C0C$
+
+$C \rightarrow 01 | 10$
+
+If we take the intersection of these two languages, we get a CSL that is
+the language of all palindromes that have the same number of 1's and 0's.
+
+\[ \square \]
 
             \item $L = \{w=xy \;|\; x,y\in\Sigma^* \text{ and } \#0(x)+\#1(x)=\#0(y)+\#1(y)\}$ (5 points)
 
@@ -266,6 +296,7 @@ context free.
             \newpage
             \subsection*{Problem 4}
             As on the midterm, the shuffle operation combines two strings $x$ and $y$ in all possible
+            
             ways that preserve the original order of symbols from $x$ and $y$.  For example, if
             $x=x_1x_2x_3$ and $y=y_1y_2y_3y_4$, some valid shufflings are $y_1x_1y_2x_2x_3y_3y_4$ and
             $x_1x_2y_1y_2y_3x_3y_4$.  We define the shuffle of two languages $shuffle(A,B)$ to be the
