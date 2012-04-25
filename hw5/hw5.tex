@@ -1,0 +1,109 @@
+\ifx\bookMode\undefined
+\documentclass[12pt]{article}
+\usepackage{373,graphicx}
+\fi
+
+\newcommand{\figurescale}{0.8}
+
+\BeginDocument
+
+\HWNum{CS373 - Spring 2012}{0}{Thursday April 26 at 2:00 PM in class (151 Everitt Lab)}
+\Title{Problem Set 5}
+\MakeTitleHW
+
+%\hline
+
+Please \underline{follow} the homework format guidelines posted on the class web
+page:
+
+\centerline{\url{\CourseWebpage}}
+%\hline
+\bigskip
+
+\begin{enumerate}
+
+	
+%~~~~~~~~~~~~~~~~~
+    \item \ProblemTtl{Decidable, Recognizable, or Neither?}{Proof}{40}
+    
+	Prove whether the following languages are Turing decidable, recognizable (but undecidable), or unrecognizable. Be sure to explain any \TM construction that you provide. You can use the examples in Sipser sections 4.1, 4.2, 5.1, and 5.3 in your reductions.
+	
+	\begin{enumerate}
+		\item $A = \{ \langle G \rangle ~|~ \text{$G$ is a \CFG and } L(G) \neq \Sigma^* \}$ (10~Points)
+		\item $B = \{ \langle G, H \rangle ~|~ \text{$G$ and $H$ are \CFGs and } L(G) = L(H) \}$ (10~Points)
+		\item $C = \{ \langle M,n \rangle ~|~ n \in \mathbb{N} \text{ and $M$ is a \TM that does not accept any string in less than $n$ steps} \}$ (10~Points)
+		\item $D = \{ \langle M \rangle ~|~  \text{$M$ is a \TM that halts on some input string} \}$ (10~Points)
+	\end{enumerate}
+	(\emph{Remember}: To prove that a language is recognizable but not decidable, you need to prove both that it is undecidable and that it is recognizable.)
+
+
+%~~~~~~~~~~~~~~~~~
+    \item \ProblemTtl{False Reduction Proof}{Analysis}{10} 
+
+        Consider the language
+ \[\mathsf{REGULAR} = \{ \langle M \rangle ~|~ \text{$M$ is a \TM and $L(M)$ is regular} \} \]	
+        Explain why the following reduction is incorrect and provide a corrected version.
+
+
+        \textbf{Claim}: \textsf{REGULAR} is not Turing recognizable.\\
+        \textbf{Proof}: We provide a reduction from $\overline{A_{TM}}$ to \textsf{REGULAR}. Assume there is a \TM $M_R$ that recognizes \textsf{REGULAR}. Then the following \TM recognizes  $\overline{A_{TM}}$:
+        
+        \begin{center}
+        \begin{algorithm}
+        \Proc $M_{CATM}$
+        \\On input $\langle M,w \rangle$:
+        \\Construct a \TM $N$: \\
+        \\\Proc $N$
+        \\On input $x$:
+        \\ \If $x$ is of the form $0^n1^n$ \Then \Accept $x$
+        \\ Simulate $M$ on input $w$
+        \\ \If $M$ accepts $w$ \Then \Accept $x$
+        \\   \Else \Reject $x$  \\
+        \- \\ Simulate $M_R$ on input $\langle N \rangle$
+        \\\If $M_R$ accepts \Then \Accept $\langle M,w \rangle$
+        \\\Else \Reject $\langle M,w \rangle$
+        \end{algorithm}
+        \end{center}
+
+%~~~~~~~~~~~~~~~~~
+    \item \ProblemTtl{Read Two and Append Process}{Comprehension}{12}
+	
+    	Consider a new type of model called the \textsf{Read Two and Append Process} (\textsf{RTAP}) that computes by continually modifying the input string. An \textsf{RTAP} \emph{reads and removes} the first two symbols of the current string, and then \emph{appends} some string to the end depending on the symbols read. The \textsf{RTAP} accepts whenever the length of the current string is less than 2. 
+		
+		Formally, an \textsf{RTAP} is a triple $R = (\Sigma, \Gamma, f)$ where $\Sigma$ is the input alphabet, $\Gamma$ is the legal symbol alphabet ($\Sigma \subseteq \Gamma$), and $f \colon \Gamma \times \Gamma \rightarrow \Gamma^*$ is the function that maps prefix symbols to new suffix strings. $R$ operates as follows:
+		\begin{enumerate}[(1)]
+			\item The current string $w \in \Gamma^*$ is initialized to the input.
+			\item If $|w| < 2$, accept the input.
+			\item If $w = w_1 w_2 w_3 w_4 ... w_n$ for $w_i \in \Gamma$, $w$ becomes updated to $w_3 w_4 ... w_n f(w_1, w_2)$.
+			\item Repeat from Step (2).
+		\end{enumerate}
+		The language of $R$ is the set of all strings that accept as input to $R$. Strings that do not accept will ``run forever''.
+		
+		Prove that \textsf{RTAPs} can accept all Turing recognizable languages over $\Sigma= \{0,1\}$ that contain all strings with length less than 2.
+%~~~~~~~~~~~~~~~~~
+    \item \ProblemTtl{Unary Unrecognizability}{Proof}{10}
+		
+	Prove that there is an unrecognizable unary language. (\emph{Hint}: Think about conversions between alphabets.)
+
+%~~~~~~~~~~~~~~~~~
+    \item \ProblemTtl{Infinite Unrecognizibility}{Proof}{12} 
+	
+	Prove that the following language is unrecognizable by a mapping reduction from $\overline{A_{TM}}$:
+	\[ N = \{\langle M \rangle ~|~ \text{$M$ is a \TM and $M$ accepts an infinite number of strings} \} \]
+
+	
+%~~~~~~~~~~~~~~~~~
+    \item \ProblemTtl{Covering}{Algorithm}{16}
+	
+	Let $S$ be a nonempty set and let $S_1, S_2, \ldots, S_m$ be a finite sequence of nonempty subsets of $S$ such that $S = \bigcup_{1 \leq i \leq m} S_i$. Define a \emph{cover} of $S$ to be a set of natural numbers $C \subseteq \{1, 2, \ldots, m\}$ such that $S = \bigcup_{i \in C} S_i$. That is, covers are collections of the $S_i$ that contain all of the elements of $S$. Notice that by definition, the set of all $S_i$ ($C = \{1, 2, \ldots, m\}$) is a cover of $S$.
+
+	\begin{enumerate}
+		\item Consider the following problem: ``Given a nonempty set $S$ and subsets $S_1, S_2, \ldots, S_m$, is there a cover of $S$ of size $2$?'' Describe an algorithm that gives the answer given $S$ and $S_1, S_2, \ldots, S_m$. (4~Points)
+		\item Argue that the previous problem is in $P$. (4~Points)
+		\item Consider the following problem: ``Given a nonempty set $S$, subsets $S_1, S_2, \ldots, S_m$, and a number $k \in \mathbb{N}$, is there a cover of $S$ of size $k$ or less?'' Describe an algorithm that gives the answer given $S$, the subsets $S_1, S_2, \ldots, S_m$, and $k$. (4~Points)
+		\item Argue that the previous problem is in $NP$. (4~Points)
+	\end{enumerate}
+
+%~~~~~~~~~~~~~~~~~
+\end{enumerate}
+\EndDocument
