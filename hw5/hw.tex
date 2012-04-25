@@ -31,12 +31,14 @@
 \begin{enumerate}[(a)]
 \item $A = \{ \langle G \rangle ~|~ \text{$G$ is a CFG and } L(G) \neq \Sigma^* \}$ (10~Points)
 
-        Decidable.
+    Decidable because A is both recognizable and corecognizeable. Sipster proves with theorm 4.22 that A is 
 
 \item $B = \{ \langle G, H \rangle ~|~ \text{$G$ and $H$ are CFGs and } L(G) = L(H) \}$ (10~Points)
 
 
 \item $C = \{ \langle M,n \rangle ~|~ n \in \mathbb{N} \text{ and $M$ is a TM that does not accept any string in less than $n$ steps} \}$ (10~Points)
+
+%TODO
 
 \item $D = \{ \langle M \rangle ~|~  \text{$M$ is a TM that halts on some input string} \}$ (10~Points)
 \end{enumerate}
@@ -66,6 +68,8 @@ Explain why the following reduction is incorrect and provide a corrected version
         If $M_R$ accepts Then Accept $\langle M,w \rangle$
         Else Reject $\langle M,w \rangle$
 
+%TODO
+
 %-------------------
 \newpage
 \subsection*{Problem 3}
@@ -83,6 +87,8 @@ Formally, an \textsf{RTAP} is a triple $R = (\Sigma, \Gamma, f)$ where $\Sigma$ 
 The language of $R$ is the set of all strings that accept as input to $R$. Strings that do not accept will ``run forever''.
 
 Prove that \textsf{RTAPs} can accept all Turing recognizable languages over $\Sigma= \{0,1\}$ that contain all strings with length less than 2.
+
+%TODO
 
 %-------------------
 \newpage
@@ -111,5 +117,7 @@ Let $S$ be a nonempty set and let $S_1, S_2, \ldots, S_m$ be a finite sequence o
     \item Consider the following problem: ``Given a nonempty set $S$, subsets $S_1, S_2, \ldots, S_m$, and a number $k \in \mathbb{N}$, is there a cover of $S$ of size $k$ or less?'' Describe an algorithm that gives the answer given $S$, the subsets $S_1, S_2, \ldots, S_m$, and $k$. (4~Points)
     \item Argue that the previous problem is in $NP$. (4~Points)
 \end{enumerate}
+
+%TODO
 
 \end{document}
